@@ -1,0 +1,99 @@
+#include <iostream>
+#include <string>
+#include <bitset>
+#include <sstream>
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+// Function 1: Decimal to Binary
+string decimalToBinary(int decimal) {
+    if (decimal == 0) return "0";
+    string binary = "";
+    while (decimal > 0) {
+        binary = to_string(decimal % 2) + binary;
+        decimal /= 2;
+    }
+    return binary;
+}
+
+// Function 2: Binary to Decimal
+int binaryToDecimal(string binary) {
+    int decimal = 0;
+    for (char bit : binary) {
+        decimal = decimal * 2 + (bit - '0');
+    }
+    return decimal;
+}
+
+// Function 3: Decimal to Hexadecimal
+string decimalToHexadecimal(int decimal) {
+    if (decimal == 0) return "0";
+    stringstream ss;
+    ss << hex << uppercase << decimal;
+    return ss.str();
+}
+
+// Function 4: Hexadecimal to Decimal
+int hexadecimalToDecimal(string hexStr) {
+    int decimal;
+    stringstream ss;
+    ss << hex << hexStr;
+    ss >> decimal;
+    return decimal;
+}
+
+// Menu display
+void showMenu() {
+    cout << "\n===== Number Conversion Menu =====\n";
+    cout << "1. Convert Decimal to Binary\n";
+    cout << "2. Convert Binary to Decimal\n";
+    cout << "3. Convert Decimal to Hexadecimal\n";
+    cout << "4. Convert Hexadecimal to Decimal\n";
+    cout << "5. Demo (Generate and convert random integers to binary)\n";
+    cout << "6. Exit\n";
+    cout << "Select an option (1-6): ";
+}
+
+int main() {
+    srand(time(0));
+    int choice;
+    
+    do {
+        showMenu();
+        cin >> choice;
+        cout << endl;
+
+        if (choice == 1) {
+            int decimal;
+            cout << "Enter decimal number: ";
+            cin >> decimal;
+            cout << "Binary: " << decimalToBinary(decimal) << endl;
+        }
+        else if (choice == 2) {
+            string binary;
+            cout << "Enter binary number: ";
+            cin >> binary;
+            cout << "Decimal: " << binaryToDecimal(binary) << endl;
+        }
+        else if (choice == 3) {
+            int decimal;
+            cout << "Enter decimal number: ";
+            cin >> decimal;
+            cout << "Hexadecimal: " << decimalToHexadecimal(decimal) << endl;
+        }
+        else if (choice == 4) {
+            string hexStr;
+            cout << "Enter hexadecimal number: ";
+            cin >> hexStr;
+            cout << "Decimal: " << hexadecimalToDecimal(hexStr) << endl;
+        }
+        else if (choice == 5) {
+            int randomNum = rand() % 100; // 0 - 99
+            cout << "Generated random number: " << randomNum << endl;
+            cout << "Binary: " << decimalToBinary(randomNum) << endl;
+        }
+        else if (choice == 6) {
+            cout << "Exiting program...\n";
